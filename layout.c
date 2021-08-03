@@ -21,7 +21,8 @@ enum planck_layers {
     _COLEMAK,
     _LOWER,
     _RAISE,
-    _ADJUST
+    _ADJUST,
+    _NUM,
 };
 
 enum planck_keycodes {
@@ -31,6 +32,7 @@ enum planck_keycodes {
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
+#define NUM   MO(_NUM)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -42,14 +44,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | Ctrl | Alt  | GUI  |Lower | Ctrl | Space| Raise| Left | Down |  Up  |Right |
+ * | Ctrl | Ctrl | Alt  | GUI  |Lower |  Num | Space| Raise| Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    KC_LCTL, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_LCTL, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   NUM,     KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Colemak
@@ -60,14 +62,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | Ctrl | Alt  | GUI  |Lower | Ctrl | Space| Raise| Left | Down |  Up  |Right |
+ * | Ctrl | Ctrl | Alt  | GUI  |Lower |  Num | Space| Raise| Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    KC_LCTL, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_LCTL, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   NUM,     KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Lower
@@ -122,6 +124,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, AG_TOGG, CG_TOGG, _______, _______, QWERTY,  COLEMAK,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
+),
+
+/* Numpad
+ * ,-----------------------------------------------------------------------------------.
+ * |      |   0  |   7  |   8  |   9  |   +  |   +  |   7  |   8  |   9  |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |   0  |   4  |   5  |   6  |   -  |   -  |   4  |   5  |   6  |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |   0  |   1  |   2  |   3  |   .  |   .  |   1  |   2  |   3  |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |   0  |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_NUM] = LAYOUT_planck_grid(
+    _______, KC_0,    KC_7,    KC_8,    KC_9,    KC_PLUS, KC_PLUS, KC_7,    KC_8,     KC_9,    _______, _______,
+    _______, KC_0,    KC_4,    KC_5,    KC_6,    KC_MINS, KC_MINS, KC_4,    KC_5,     KC_6,    _______, _______,
+    _______, KC_0,    KC_1,    KC_2,    KC_3,    KC_DOT,  KC_DOT,  KC_1,    KC_2,     KC_3,    _______, _______,
+    _______, _______, _______, _______, _______, _______, KC_0,    _______, _______,  _______, _______, _______
 )
 };
 
