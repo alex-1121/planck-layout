@@ -23,7 +23,8 @@ enum planck_layers {
     _RAISE,
     _ADJUST,
     _NUM,
-    _ARROWS,
+    _NAV,
+    _MEDIA,
 };
 
 enum planck_keycodes {
@@ -31,10 +32,11 @@ enum planck_keycodes {
     COLEMAK,
 };
 
-#define LOWER  MO(_LOWER)
-#define RAISE  MO(_RAISE)
-#define NUM    MO(_NUM)
-#define ARROWS MO(_ARROWS)
+#define LOWER MO(_LOWER)
+#define RAISE MO(_RAISE)
+#define NUM   MO(_NUM)
+#define NAV   MO(_NAV)
+#define MEDIA MO(_MEDIA)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -53,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LALT_T(KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,  KC_T,            KC_Y,   KC_U,  KC_I,    KC_O,    KC_P,    KC_BSPC,
     LGUI_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,  KC_G,            KC_H,   KC_J,  KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT,        KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,            KC_N,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-    KC_LCTL,        KC_LCTL, KC_LALT, KC_LGUI, LOWER, LT(NUM, KC_SPC), KC_SPC, RAISE, ARROWS,  _______, KC_LEFT, KC_RIGHT
+    KC_LCTL,        KC_LCTL, KC_LALT, KC_LGUI, LOWER, LT(NUM, KC_SPC), KC_SPC, RAISE, NAV,     MEDIA,   KC_LEFT, KC_RIGHT
 ),
 
 /* Colemak
@@ -71,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LALT_T(KC_TAB), KC_Q,    KC_W,    KC_F,    KC_P,  KC_G,            KC_J,    KC_L, KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
     LGUI_T(KC_ESC), KC_A,    KC_R,    KC_S,    KC_T,  KC_D,            KC_H,    KC_N, KC_E,    KC_I,    KC_O,    KC_QUOT,
     KC_LSFT,        KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,            KC_K,    KC_M, KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-    KC_LCTL,        KC_LCTL, KC_LALT, KC_LGUI, LOWER, LT(NUM, KC_SPC), KC_SPC, RAISE, ARROWS,  _______, KC_LEFT, KC_RIGHT
+    KC_LCTL,        KC_LCTL, KC_LALT, KC_LGUI, LOWER, LT(NUM, KC_SPC), KC_SPC, RAISE, NAV,     MEDIA,   KC_LEFT, KC_RIGHT
 ),
 
 /* Lower
@@ -146,9 +148,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, KC_0,    _______,  _______, _______, _______
 ),
 
-/* Arrows
+/* Navigation
  * ,-----------------------------------------------------------------------------------.
- * |      |      |      |      |      |      |      | Vol- |  Up  | Vol+ |      |      |
+ * |      |      |      |      |      |      |      | PgUp |  Up  | PgDn |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      | Left | Down |Right |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -157,12 +159,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_ARROWS] = LAYOUT_planck_grid(
-    _______, _______, _______, _______, _______, _______, _______, KC_VOLD, KC_UP,    KC_VOLU, _______, _______,
+[_NAV] = LAYOUT_planck_grid(
+    _______, _______, _______, _______, _______, _______, _______, KC_PGUP, KC_UP,    KC_PGDN, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN,  KC_RGHT, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_MPLY,  KC_MNXT, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
-)
+),
+
+/* Media
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      |      |      | Vol- | Play |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      | Prev | Vol+ | Next |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      | Prev | Next |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_MEDIA] = LAYOUT_planck_grid(
+        _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLU,  KC_MPLY, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, KC_MPRV, KC_VOLD,  KC_MNXT, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, KC_MPRV, KC_MNXT
+        )
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
