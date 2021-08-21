@@ -20,9 +20,9 @@ enum planck_layers {
     _QWERTY,
     _COLEMAK,
     _SYM,
-    _ADJUST,
     _NUM,
     _NAV,
+    _ADJUST,
     _MEDIA,
 };
 
